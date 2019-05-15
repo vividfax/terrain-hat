@@ -1,5 +1,5 @@
-const rows = 200;
-const stitches = 120;
+const rows = 75;
+const stitches = 100;
 
 const cellSize = 10;
 
