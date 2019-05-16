@@ -2,7 +2,7 @@
 
 Knitting chart generator for a hat that uses simplex noise as a stitch pattern.
 
-## Simplex Noise
+## Simplex noise
 
 Simplex noise is a clustered randomness algorithm. When translated into knits and purls it produces a stitch pattern with an organic texture.
 
