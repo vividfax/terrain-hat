@@ -10,7 +10,7 @@ Unlike many traditional knitting patterns, there are no section repeats. The kni
 
 ## Issues
 
-* [ ] Wrap around simplex noise
+* [x] Wrap around simplex noise
 * [ ] Fix new row jog
 
 ## Desired features

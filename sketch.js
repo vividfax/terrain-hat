@@ -1,5 +1,5 @@
 const rows = 75;
-const stitches = 100;
+const stitches = 96;
 
 const cellSize = 10;
 
@@ -73,9 +73,14 @@ function getSimplex(x, y) {
 	let power = 0;
 	let fraction = 1;
 
+	const angle = TWO_PI / stitches * x;
+	const radius = stitches / TWO_PI;
+	x = radius * cos(angle);
+	const z = radius * sin(angle);
+
 	for (let i = 0; i < octaves; i++) {
 
-		noise += simplex.noise2D(x * scale, y * scale) * fraction;
+		noise += simplex.noise3D(x * scale, y * scale, z * scale) * fraction;
 		power += fraction;
 		fraction *= falloff;
 		scale *= 2;
