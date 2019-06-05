@@ -11,16 +11,17 @@ Unlike many traditional knitting patterns, there are no section repeats. The kni
 ## Issues
 
 * [x] Wrap around simplex noise
-* [ ] Fix new row jog
+* [x] ~~Fix new row jog~~ non issue
 
 ## Desired features
 
-* [ ] Save image/pdf
-* [ ] Numbered grid
-* [ ] Grid interval guidelines
 * [ ] Custom stitch and row count
 * [ ] Pattern size and detail sliders
-* [ ] Seed input
-* [ ] Seed, settings and url watermark
-* [ ] Crown decreases
+* [ ] Save image/pdf button
+* [ ] Re-roll
+* [ ] Settings and url watermark
 * [ ] Zoom
+* [ ] Seed input
+* [x] Numbered grid
+* [x] Grid interval guides
+* [x] Crown decreases
