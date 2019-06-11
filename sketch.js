@@ -1,7 +1,9 @@
 let rows = 66;
 let stitches = 96;
+let scale = 0.1;
+let texture = 0.18;
 
-let stitchSlider, rowSlider;
+let stitchSlider, rowSlider, scaleSlider, textureSlider;
 const validStitches = [72, 84, 96, 108, 120, 132];
 
 const cellSize = 8;
@@ -32,6 +34,14 @@ function makeControls() {
 	createP('rows').parent('controls');
 	rowSlider = createSlider(50, 90, rows, 1);
 	rowSlider.parent('controls');
+
+	createP('scale').parent('controls');
+	scaleSlider = createSlider(0.01, 0.4, scale, 0.01);
+	scaleSlider.parent('controls');
+
+	createP('texture').parent('controls');
+	textureSlider = createSlider(0.001, 0.9, texture, 0.001);
+	textureSlider.parent('controls');
 }
 
 function draw() {
@@ -55,12 +65,18 @@ function update() {
 
 	const newStitches = validStitches[stitchSlider.value()];
 	const newRows = rowSlider.value();
+	const newScale = scaleSlider.value();
+	const newTexture = textureSlider.value();
 
 	if (stitches != newStitches ||
-		rows != newRows) {
+		rows != newRows ||
+		scale != newScale ||
+		texture != newTexture) {
 
 		stitches = newStitches;
 		rows = newRows;
+		scale = newScale;
+		texture = newTexture;
 		return true;
 	}
 	return false;
@@ -165,10 +181,9 @@ function getDecreaseRows(sections) {
 
 function getSimplex(x, y, stitchCount) {
 
-	let scale = 0.1;
-	const roughness = 0.1;
+	let thisScale = scale;
+	const octaves = 5;
 
-	const octaves = 9;
 	let noise = 0;
 	let power = 0;
 	let fraction = 1;
@@ -180,10 +195,10 @@ function getSimplex(x, y, stitchCount) {
 
 	for (let i = 0; i < octaves; i++) {
 
-		noise += simplex.noise3D(x * scale, y * scale, z * scale) * fraction;
+		noise += simplex.noise3D(x * thisScale, y * thisScale, z * thisScale) * fraction;
 		power += fraction;
-		fraction *= roughness;
-		scale *= 2;
+		fraction *= texture;
+		thisScale *= 2;
 	}
 	noise /= power;
 
