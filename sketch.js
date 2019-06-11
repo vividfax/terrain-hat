@@ -1,56 +1,94 @@
-const rows = 66;
-const stitches = 96;
+let rows = 66;
+let stitches = 96;
 
-const cellSize = 10;
+let stitchSlider, rowSlider;
+const validStitches = [72, 84, 96, 108, 120, 132];
 
-let simplex = new SimplexNoise();
+const cellSize = 8;
+
+const simplex = new SimplexNoise();
 
 function setup() {
 
-	pixelDensity(2);
-	createCanvas(cellSize * stitches + 200, cellSize * rows + 70);
+	let canvas = createCanvas(cellSize * 132 + 200, cellSize * 90 + 70);
+	canvas.parent('sketch-holder');
 
-	background('#ccc');
-	noLoop();
+	makeControls();
+
+	pixelDensity(2);
+	// background('#ccc');
 	noStroke();
 	rectMode(CENTER);
+
+	// noLoop();
+}
+
+function makeControls() {
+
+	createP('stitches').parent('controls');
+	stitchSlider = createSlider(0, validStitches.length - 1, 2, 1);
+	stitchSlider.parent('controls');
+
+	createP('rows').parent('controls');
+	rowSlider = createSlider(50, 90, rows, 1);
+	rowSlider.parent('controls');
 }
 
 function draw() {
 
-	translate(50, 50);
-	drawKey();
+	if (update() || frameCount == 1) {
 
-	translate(100, -10);
-	drawChart();
+		background('#fff');
 
-	translate(-cellSize / 2, -cellSize / 2);
-	drawGuides();
+		translate(50, 50);
+		drawKey();
+
+		translate(100, -10);
+		drawChart();
+
+		translate(-cellSize / 2, -cellSize / 2);
+		drawGuides();
+	}
+}
+
+function update() {
+
+	const newStitches = validStitches[stitchSlider.value()];
+	const newRows = rowSlider.value();
+
+	if (stitches != newStitches ||
+		rows != newRows) {
+
+		stitches = newStitches;
+		rows = newRows;
+		return true;
+	}
+	return false;
 }
 
 function drawKey() {
 
-	let labels = ['knit', 'purl', 'k2tog', 'p2tog'];
+	const labels = ['knit', 'purl', 'k2tog', 'p2tog'];
 
 	for (let i = 0; i < labels.length; i++) {
 		const label = labels[i];
 
-		const x = 0;
 		const lineHeight = 35;
 
 		noStroke();
 		fill('#222');
-		textSize(16);
-		text(label, x + 15, lineHeight * i + 4);
-		drawStitch(x, lineHeight * i, label);
+		textSize(13);
+		textAlign(LEFT, BASELINE);
+		text(label, 15, lineHeight * i + 4);
+		drawStitch(0, lineHeight * i, label);
 	}
 }
 
 function drawChart() {
 
-	let sections = getSections(stitches);
-	let sectionLength = stitches / sections
-	let decreaseRows = getDecreaseRows(sections);
+	const sections = getSections(stitches);
+	const sectionLength = stitches / sections
+	const decreaseRows = getDecreaseRows(sections);
 
 	let emptyStitches = 0;
 	let decreaseStitch = false;
@@ -69,13 +107,14 @@ function drawChart() {
 		}
 		for (let g = 0; g < sections; g++) {
 			for (let h = 0; h < sectionLength; h++) {
-				let i = g * sectionLength + h;
+				const i = g * sectionLength + h;
 
 				let stitchType;
-				const ratio = 2 / 3; // stitch/row gauge
+				// const ratio = 2/ 3; // stitch/row gauge
+				const ratio = 1; // stitch/row gauge
 
-				let x = stitchCount / sections * g + h;
-				const noise = getSimplex(x, j * ratio, stitchCount);
+				const x = stitchCount / sections * g + h;
+				const noise = getSimplex(x, (rows - j) * ratio, stitchCount);
 
 				if (decreaseStitch && emptyStitches == h) {
 					if (noise == 0) {
@@ -99,12 +138,11 @@ function drawChart() {
 
 function getSections(stitchCount) {
 
-	for (let i = 5; i <= 8; i++) {
+	for (let i = 6; i <= 8; i++) {
 		if (stitchCount % i == 0) {
 			return i;
 		}
 	}
-	console.log('error: non divisible into sections ' + stitchCount);
 }
 
 function getDecreaseRows(sections) {
@@ -128,9 +166,9 @@ function getDecreaseRows(sections) {
 function getSimplex(x, y, stitchCount) {
 
 	let scale = 0.1;
-	const roughness = 0.6;
+	const roughness = 0.1;
 
-	const octaves = 4;
+	const octaves = 9;
 	let noise = 0;
 	let power = 0;
 	let fraction = 1;
@@ -158,6 +196,8 @@ function getSimplex(x, y, stitchCount) {
 function drawStitch(x, y, type) {
 
 	noStroke();
+	fill('#ccc');
+	rect(x, y, cellSize, cellSize);
 	fill('#fff');
 	rect(x, y, cellSize * 0.9, cellSize * 0.9);
 
@@ -166,7 +206,7 @@ function drawStitch(x, y, type) {
 	switch (type) {
 		case 'empty':
 			fill('#ccc');
-			rect(x, y, cellSize * 0.9, cellSize * 0.9);
+			rect(x, y, cellSize, cellSize);
 			break;
 		case 'knit':
 			break;
@@ -175,11 +215,12 @@ function drawStitch(x, y, type) {
 			break;
 		case 'k2tog':
 			stroke(0);
-			line(x - 3, y + 3, x + 3, y - 3);
+			line(x - 2, y + 2, x + 2, y - 2);
 			break;
 		case 'p2tog':
 			stroke(0);
-			line(x - 3, y - 3, x + 3, y + 3);
+			line(x - 2, y + 2, x + 2, y - 2);
+			ellipse(x - 2, y - 2, 1);
 			break;
 	}
 }
@@ -189,14 +230,14 @@ function drawGuides() {
 	fill('#555');
 	textAlign(CENTER, CENTER);
 	textSize(10);
-	let gridSize = stitches / getSections(stitches) / 2;
+	const gridSize = stitches / getSections(stitches) / 2;
 
 	for (let i = stitches; i > -gridSize; i -= gridSize) {
 		if (i < 0) {
 			i = 0;
 		}
-		let x = cellSize * i;
-		let y = rows * cellSize
+		const x = cellSize * i;
+		const y = rows * cellSize
 		stroke('#999');
 		line(x, 0, x, y);
 		noStroke();
@@ -206,8 +247,8 @@ function drawGuides() {
 		if (i < 0) {
 			i = 0;
 		}
-		let x = stitches * cellSize;
-		let y = cellSize * i;
+		const x = stitches * cellSize;
+		const y = cellSize * i;
 		stroke('#999');
 		line(0, y, x, y);
 		noStroke();
