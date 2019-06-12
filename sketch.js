@@ -5,6 +5,7 @@ let texture = 0.18;
 
 let stitchSlider, rowSlider, scaleSlider, textureSlider;
 const validStitches = [72, 84, 96, 108, 120, 132];
+let saveButton;
 
 const cellSize = 8;
 
@@ -42,6 +43,15 @@ function makeControls() {
 	createP('texture').parent('controls');
 	textureSlider = createSlider(0.001, 0.9, texture, 0.001);
 	textureSlider.parent('controls');
+
+	createP('').parent('controls');
+	saveButton = createButton('save image');
+	saveButton.parent('controls');
+	saveButton.mousePressed(saveImage);
+}
+
+function saveImage() {
+	saveCanvas(stitches + '-sts-' + rows + '-rows', 'png');
 }
 
 function draw() {

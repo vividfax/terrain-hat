@@ -15,11 +15,11 @@ Unlike many traditional knitting patterns, there are no section repeats. The kni
 
 ## Desired features
 
-* [ ] Save image/pdf button
 * [ ] Re-roll
 * [ ] Settings and url watermark
 * [ ] Zoom
 * [ ] Seed input
+* [x] Save image ~~/pdf~~ button
 * [x] Pattern size and detail sliders
 * [x] Custom stitch and row count
 * [x] Numbered grid
