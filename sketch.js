@@ -139,7 +139,7 @@ function drawChart() {
 				// const ratio = 2/ 3; // stitch/row gauge
 				const ratio = 1; // stitch/row gauge
 
-				const x = stitchCount / sections * g + h;
+				const x = stitchCount / sections * g + h - sectionLength + stitchCount / sections;
 				const noise = getSimplex(x, (rows - j) * ratio, stitchCount);
 
 				if (decreaseStitch && emptyStitches == h) {
