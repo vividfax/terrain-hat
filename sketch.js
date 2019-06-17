@@ -1,6 +1,6 @@
 let rows = 66;
 let stitches = 96;
-let scale = 0.1;
+let patternScale = 0.1;
 let texture = 0.18;
 
 let stitchSlider, rowSlider, scaleSlider, textureSlider;
@@ -13,12 +13,12 @@ const simplex = new SimplexNoise();
 
 function setup() {
 
-	let canvas = createCanvas(cellSize * 132 + 200, cellSize * 90 + 70);
+	let canvas = createCanvas(cellSize * stitches + 200, cellSize * rows + 70);
 	canvas.parent('sketch-holder');
 
 	makeControls();
 
-	pixelDensity(2);
+	pixelDensity(4);
 	// background('#ccc');
 	noStroke();
 	rectMode(CENTER);
@@ -28,26 +28,34 @@ function setup() {
 
 function makeControls() {
 
-	createP('stitches').parent('controls');
-	stitchSlider = createSlider(0, validStitches.length - 1, 2, 1);
-	stitchSlider.parent('controls');
+	stitchSlider = makeSlider(stitchSlider, 'Stitches', 0, validStitches.length - 1, 2, 1);
+	rowSlider = makeSlider(rowSlider, 'Rows', 50, 90, rows, 1);
+	scaleSlider = makeSlider(scaleSlider, 'Scale', 0.01, 0.3, patternScale, 0.01);
+	textureSlider = makeSlider(textureSlider, 'Texture', 0, 0.9, texture, 0.1);
 
-	createP('rows').parent('controls');
-	rowSlider = createSlider(50, 90, rows, 1);
-	rowSlider.parent('controls');
+	saveButton = makeButton(saveButton, 'Save image', saveImage)
+}
 
-	createP('scale').parent('controls');
-	scaleSlider = createSlider(0.01, 0.4, scale, 0.01);
-	scaleSlider.parent('controls');
+function makeSlider(sliderName, label, min, max, defaultValue, step) {
 
-	createP('texture').parent('controls');
-	textureSlider = createSlider(0.001, 0.9, texture, 0.001);
-	textureSlider.parent('controls');
+	createElement('label', label).parent('controls').attribute('for', label).class('mt-1').id(label + "Label");
 
-	createP('').parent('controls');
-	saveButton = createButton('save image');
-	saveButton.parent('controls');
-	saveButton.mousePressed(saveImage);
+	sliderName = createSlider(min, max, defaultValue, step);
+	sliderName.id(label);
+	sliderName.parent('controls');
+	sliderName.class('form-control-range mb-1');
+
+	return sliderName;
+}
+
+function makeButton(buttonName, text, action) {
+
+	buttonName = createButton(text);
+	buttonName.parent('controls');
+	buttonName.class('btn btn-outline-primary btn-block mt-4');
+	buttonName.mousePressed(action);
+
+	return buttonName;
 }
 
 function saveImage() {
@@ -58,16 +66,26 @@ function draw() {
 
 	if (update() || frameCount == 1) {
 
+		const canvasScale = 0.7;
+
+		resizeCanvas(canvasScale * cellSize * stitches + 135, canvasScale * cellSize * rows + 60);
+		scale(canvasScale);
+
 		background('#fff');
 
-		translate(50, 50);
+		translate(40, 50);
 		drawKey();
 
-		translate(100, -10);
+		translate(110, -5);
 		drawChart();
 
 		translate(-cellSize / 2, -cellSize / 2);
 		drawGuides();
+
+		select('#StitchesLabel').html('Stitches · ' + stitches);
+		select('#RowsLabel').html('Rows · ' + rows);
+		select('#ScaleLabel').html('Scale · ' + patternScale);
+		select('#TextureLabel').html('Texture · ' + texture);
 	}
 }
 
@@ -80,12 +98,12 @@ function update() {
 
 	if (stitches != newStitches ||
 		rows != newRows ||
-		scale != newScale ||
+		patternScale != newScale ||
 		texture != newTexture) {
 
 		stitches = newStitches;
 		rows = newRows;
-		scale = newScale;
+		patternScale = newScale;
 		texture = newTexture;
 		return true;
 	}
@@ -95,11 +113,10 @@ function update() {
 function drawKey() {
 
 	const labels = ['knit', 'purl', 'k2tog', 'p2tog'];
+	const lineHeight = 35;
 
 	for (let i = 0; i < labels.length; i++) {
 		const label = labels[i];
-
-		const lineHeight = 35;
 
 		noStroke();
 		fill('#222');
@@ -191,7 +208,7 @@ function getDecreaseRows(sections) {
 
 function getSimplex(x, y, stitchCount) {
 
-	let thisScale = scale;
+	let thisScale = patternScale;
 	const octaves = 5;
 
 	let noise = 0;
