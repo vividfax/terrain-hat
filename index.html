@@ -6,9 +6,10 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>noise-hat</title>
+	<title>Hat chart generator</title>
 
 	<link rel="stylesheet" href="libraries/bootstrap.min.css">
+
 	<script src="libraries/p5.min.js"></script>
 	<script src="libraries/p5.dom.min.js"></script>
 	<script src="libraries/simplex-noise.min.js"></script>
@@ -18,29 +19,70 @@
 		body {
 			margin: 0;
 			padding: 0;
+			color: #fff;
 		}
 
 		canvas {
 			margin: auto;
 		}
+
+		#sketchPanel {
+			background: #fff;
+		}
+
+		#controlPanel {
+			background: #008585;
+		}
+
+		#textPanel {
+			background: #B6A9C2;
+		}
+
+		.btn-outline-light:hover {
+			color: #006B6B;
+		}
 	</style>
 </head>
 
-<body class="bg-light">
-	<div class="container mt-5 mb-5">
-		<div class="row">
-			<div class="col-sm-9 order-2 order-sm-1 overflow-auto">
+<body class="">
+	<div class="container-fluid">
+		<div class="row" id="controlPanel">
+			<div class="col-sm-9 order-2 order-sm-1 pt-5 pb-4 overflow-auto" id="sketchPanel">
 				<div class="" id="sketch-holder"></div>
 			</div>
-			<div class="col-sm-3 order-1 order-sm-2">
-				<h2 class="mb-4">Knitting chart generator</h2>
-				<div class="mb-5" id="controls"></div>
-				<p>
-					<!-- insert description here -->
+			<div class="col-sm-2 order-1 order-sm-2 pt-5 pb-4 ml-sm-4">
+				<h2 class="mb-3 pt-4">
+					Hat chart generator
+				</h2>
+				<p class="mb-5 font-italic">
+					Knitting chart generator for a hat that uses simplex noise as a stitch pattern.
 				</p>
+				<div class="mb-4" id="controls"></div>
 			</div>
 		</div>
-	</div>
+		<div class="row pt-5 pb-5" id="textPanel">
+			<div class="col-sm-7 offset-sm-2">
+				<div class="row">
+					<div class="col-sm-4 pr-sm-4 text-sm-right font-italic">
+						<p>
+							Simplex noise
+						</p>
+					</div>
+					<div class="col-sm-8">
+						<p>
+							Simplex noise is a clustered randomness algorithm. When translated into knits and purls it
+							produces a stitch pattern with an organic texture.
+						</p>
+						<p>
+							Unlike many traditional knitting patterns, there are no section repeats. The knitting chart
+							shows the pattern in full: every knit and every purl. The lack of repeats in the pattern
+							does mean it requires more focus when knitting, however, the upside is that any mistakes in
+							following the pattern are barely noticeable.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
 </body>
 
 </html>

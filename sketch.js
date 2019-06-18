@@ -38,12 +38,12 @@ function makeControls() {
 
 function makeSlider(sliderName, label, min, max, defaultValue, step) {
 
-	createElement('label', label).parent('controls').attribute('for', label).class('mt-1').id(label + "Label");
+	createElement('label', label).parent('controls').attribute('for', label).class('').id(label + "Label");
 
 	sliderName = createSlider(min, max, defaultValue, step);
 	sliderName.id(label);
 	sliderName.parent('controls');
-	sliderName.class('form-control-range mb-1');
+	sliderName.class('form-control-range mb-2');
 
 	return sliderName;
 }
@@ -52,7 +52,7 @@ function makeButton(buttonName, text, action) {
 
 	buttonName = createButton(text);
 	buttonName.parent('controls');
-	buttonName.class('btn btn-outline-primary btn-block mt-4');
+	buttonName.class('btn btn-outline-light btn-block mt-4');
 	buttonName.mousePressed(action);
 
 	return buttonName;
