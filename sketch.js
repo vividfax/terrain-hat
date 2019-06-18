@@ -66,9 +66,9 @@ function draw() {
 
 	if (update() || frameCount == 1) {
 
-		const canvasScale = 0.7;
+		const canvasScale = 0.8;
 
-		resizeCanvas(canvasScale * cellSize * stitches + 135, canvasScale * cellSize * rows + 60);
+		resizeCanvas(canvasScale * (cellSize * stitches + 195), canvasScale * (cellSize * rows + 85));
 		scale(canvasScale);
 
 		background('#fff');

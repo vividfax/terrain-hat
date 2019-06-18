@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=1024">
 
 	<title>Hat chart generator</title>
 
@@ -38,8 +38,14 @@
 			background: #B6A9C2;
 		}
 
-		.btn-outline-light:hover {
+		.btn-outline-light:hover,
+		.darkText {
 			color: #006B6B;
+		}
+
+		#title {
+			font-family: Baskerville, 'Times New Roman', Times, serif;
+			line-height: 44px;
 		}
 	</style>
 </head>
@@ -51,9 +57,9 @@
 				<div class="" id="sketch-holder"></div>
 			</div>
 			<div class="col-sm-2 order-1 order-sm-2 pt-5 pb-4 ml-sm-4">
-				<h2 class="mb-3 pt-4">
+				<h1 class="mb-3 pt-4" id="title">
 					Hat chart generator
-				</h2>
+				</h1>
 				<p class="mb-5 font-italic">
 					Knitting chart generator for a hat that uses simplex noise as a stitch pattern.
 				</p>
@@ -63,7 +69,7 @@
 		<div class="row pt-5 pb-5" id="textPanel">
 			<div class="col-sm-7 offset-sm-2">
 				<div class="row">
-					<div class="col-sm-4 pr-sm-4 text-sm-right font-italic">
+					<div class="col-sm-4 pr-sm-4 text-sm-right font-italic darkText">
 						<p>
 							Simplex noise
 						</p>
