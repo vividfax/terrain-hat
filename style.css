@@ -42,6 +42,24 @@ body {
     margin-top: 1px;
 }
 
+.slider::thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    background: #4fa7a8;
+    cursor: pointer;
+}
+
+.slider::-ms-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: none;
+    background: #4fa7a8;
+    cursor: pointer;
+}
+
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
