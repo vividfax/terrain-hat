@@ -1,7 +1,7 @@
 let rows = 66;
 let stitches = 96;
-let patternScale = 0.1;
-let texture = 0.18;
+let patternScale = 1;
+let texture = 0.2;
 
 let stitchSlider, rowSlider, scaleSlider, textureSlider;
 const validStitches = [72, 84, 96, 108, 120, 132];
@@ -30,7 +30,7 @@ function makeControls() {
 
 	stitchSlider = makeSlider(stitchSlider, 'Stitches', 0, validStitches.length - 1, 2, 1);
 	rowSlider = makeSlider(rowSlider, 'Rows', 50, 90, rows, 1);
-	scaleSlider = makeSlider(scaleSlider, 'Scale', 0.01, 0.3, patternScale, 0.01);
+	scaleSlider = makeSlider(scaleSlider, 'Scale', 0.1, 2.5, patternScale, 0.1);
 	textureSlider = makeSlider(textureSlider, 'Texture', 0, 0.9, texture, 0.1);
 
 	saveButton = makeButton(saveButton, 'Save image', saveImage)
@@ -43,7 +43,7 @@ function makeSlider(sliderName, label, min, max, defaultValue, step) {
 	sliderName = createSlider(min, max, defaultValue, step);
 	sliderName.id(label);
 	sliderName.parent('controls');
-	sliderName.class('form-control-range mb-2');
+	sliderName.class('form-control-range mb-3 slider');
 
 	return sliderName;
 }
@@ -52,7 +52,7 @@ function makeButton(buttonName, text, action) {
 
 	buttonName = createButton(text);
 	buttonName.parent('controls');
-	buttonName.class('btn btn-outline-light btn-block mt-4');
+	buttonName.class('btn btn-outline-light btn-block mt-5');
 	buttonName.mousePressed(action);
 
 	return buttonName;
@@ -84,8 +84,8 @@ function draw() {
 
 		select('#StitchesLabel').html('Stitches · ' + stitches);
 		select('#RowsLabel').html('Rows · ' + rows);
-		select('#ScaleLabel').html('Scale · ' + patternScale);
-		select('#TextureLabel').html('Texture · ' + texture);
+		select('#ScaleLabel').html('Scale · ' + patternScale.toFixed(1));
+		select('#TextureLabel').html('Texture · ' + texture.toFixed(1));
 	}
 }
 
@@ -208,7 +208,7 @@ function getDecreaseRows(sections) {
 
 function getSimplex(x, y, stitchCount) {
 
-	let thisScale = patternScale;
+	let thisScale = patternScale / 10;
 	const octaves = 5;
 
 	let noise = 0;
