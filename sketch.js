@@ -199,7 +199,7 @@ function getDecreaseRows(sections) {
 		if (stitchCount >= 10) {
 			decreaseRows.push(i);
 		}
-		if (i >= 11) {
+		if (i >= stitches / sections / 2) {
 			i++;
 		}
 	}
@@ -256,13 +256,14 @@ function drawStitch(x, y, type) {
 			ellipse(x, y, cellSize / 3);
 			break;
 		case 'k2tog':
-			stroke(0);
+			stroke('#555');
 			line(x - 2, y + 2, x + 2, y - 2);
 			break;
 		case 'p2tog':
-			stroke(0);
+			stroke('#555');
 			line(x - 2, y + 2, x + 2, y - 2);
-			ellipse(x - 2, y - 2, 1);
+			noStroke();
+			ellipse(x - 2, y - 2, 2);
 			break;
 	}
 }
