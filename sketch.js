@@ -76,7 +76,7 @@ function draw() {
 		translate(40, 50);
 		drawKey();
 
-		translate(110, -5);
+		translate(110, -6);
 		drawChart();
 
 		translate(-cellSize / 2, -cellSize / 2);
