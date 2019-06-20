@@ -1,4 +1,4 @@
-let rows = 66;
+let rows = 59;
 let stitches = 96;
 let patternScale = 1;
 let texture = 0.2;
@@ -29,7 +29,7 @@ function setup() {
 function makeControls() {
 
 	stitchSlider = makeSlider(stitchSlider, 'Stitches', 0, validStitches.length - 1, 2, 1);
-	rowSlider = makeSlider(rowSlider, 'Rows', 50, 90, rows, 1);
+	rowSlider = makeSlider(rowSlider, 'Rows', 40, 80, rows, 1);
 	scaleSlider = makeSlider(scaleSlider, 'Scale', 0.1, 2.5, patternScale, 0.1);
 	textureSlider = makeSlider(textureSlider, 'Texture', 0, 0.9, texture, 0.1);
 
@@ -38,7 +38,7 @@ function makeControls() {
 
 function makeSlider(sliderName, label, min, max, defaultValue, step) {
 
-	createElement('label', label).parent('controls').attribute('for', label).class('').id(label + "Label");
+	createElement('label', label + ' · <span class=' + label + '></span>').parent('controls').attribute('for', label);
 
 	sliderName = createSlider(min, max, defaultValue, step);
 	sliderName.id(label);
@@ -64,7 +64,7 @@ function saveImage() {
 
 function draw() {
 
-	if (update() || frameCount == 1) {
+	if (change() || frameCount == 1) {
 
 		const canvasScale = 0.8;
 
@@ -82,14 +82,23 @@ function draw() {
 		translate(-cellSize / 2, -cellSize / 2);
 		drawGuides();
 
-		select('#StitchesLabel').html('Stitches · ' + stitches);
-		select('#RowsLabel').html('Rows · ' + rows);
-		select('#ScaleLabel').html('Scale · ' + patternScale.toFixed(1));
-		select('#TextureLabel').html('Texture · ' + texture.toFixed(1));
+		updateClass('.Stitches', stitches);
+		updateClass('.Rows', rows);
+		updateClass('.Scale', patternScale.toFixed(1));
+		updateClass('.Texture', texture.toFixed(1));
+		updateClass('.Interval', stitches / 12);
 	}
 }
 
-function update() {
+function updateClass(className, html) {
+
+	let classItems = selectAll(className);
+	for (let i = 0; i < classItems.length; i++) {
+		classItems[i].html(html);
+	}
+}
+
+function change() {
 
 	const newStitches = validStitches[stitchSlider.value()];
 	const newRows = rowSlider.value();

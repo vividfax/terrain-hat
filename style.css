@@ -79,3 +79,13 @@ body {
     background: #4fa7a8;
     cursor: pointer;
 }
+
+a {
+    color: #fff;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #fff;
+    text-decoration: none;
+}
