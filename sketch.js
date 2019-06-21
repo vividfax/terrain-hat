@@ -4,8 +4,10 @@ let patternScale = 1;
 let texture = 0.2;
 
 let stitchSlider, rowSlider, scaleSlider, textureSlider;
-const validStitches = [72, 84, 96, 108, 120, 132];
 let saveButton;
+const validStitches = [72, 84, 96, 108, 120, 132];
+const minRows = 40;
+const maxRows = 80;
 
 const cellSize = 8;
 
@@ -29,7 +31,7 @@ function setup() {
 function makeControls() {
 
 	stitchSlider = makeSlider(stitchSlider, 'Stitches', 0, validStitches.length - 1, 2, 1);
-	rowSlider = makeSlider(rowSlider, 'Rows', 40, 80, rows, 1);
+	rowSlider = makeSlider(rowSlider, 'Rows', minRows, maxRows, rows, 1);
 	scaleSlider = makeSlider(scaleSlider, 'Scale', 0.1, 2.5, patternScale, 0.1);
 	textureSlider = makeSlider(textureSlider, 'Texture', 0, 0.9, texture, 0.1);
 
@@ -60,6 +62,23 @@ function makeButton(buttonName, text, action) {
 
 function saveImage() {
 	saveCanvas(stitches + '-sts-' + rows + '-rows', 'png');
+}
+
+function bulkSave(range) {
+
+	range += 1;
+	const originalRows = rows;
+
+	for (let i = minRows; i < maxRows + 1; i++) {
+
+		if (!range || (i < originalRows + range && i > originalRows - range)) {
+
+			rowSlider.value(i);
+			draw();
+			saveImage();
+		}
+	}
+	rowSlider.value(originalRows);
 }
 
 function draw() {
