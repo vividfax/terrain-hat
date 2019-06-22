@@ -5,8 +5,8 @@ let texture = 0.2;
 
 let stitchSlider, rowSlider, scaleSlider, textureSlider;
 let saveButton;
-const validStitches = [72, 84, 96, 108, 120, 132];
-const minRows = 40;
+const validStitches = [48, 60, 72, 84, 96, 108, 120, 132];
+const minRows = 25;
 const maxRows = 80;
 
 const cellSize = 8;
@@ -30,7 +30,7 @@ function setup() {
 
 function makeControls() {
 
-	stitchSlider = makeSlider(stitchSlider, 'Stitches', 0, validStitches.length - 1, 2, 1);
+	stitchSlider = makeSlider(stitchSlider, 'Stitches', 0, validStitches.length - 1, 4, 1);
 	rowSlider = makeSlider(rowSlider, 'Rows', minRows, maxRows, rows, 1);
 	scaleSlider = makeSlider(scaleSlider, 'Scale', 0.1, 2.5, patternScale, 0.1);
 	textureSlider = makeSlider(textureSlider, 'Texture', 0, 0.9, texture, 0.1);
@@ -303,6 +303,9 @@ function drawGuides() {
 	textSize(10);
 	const gridSize = stitches / getSections(stitches) / 2;
 
+	noStroke();
+	text('0', stitches * cellSize + cellSize, rows * cellSize + cellSize);
+
 	for (let i = stitches; i > -gridSize; i -= gridSize) {
 		if (i < 0) {
 			i = 0;
@@ -311,8 +314,11 @@ function drawGuides() {
 		const y = rows * cellSize
 		stroke('#999');
 		line(x, 0, x, y);
-		noStroke();
-		text(stitches - i, x, y + cellSize);
+
+		if (i != stitches) {
+			noStroke();
+			text(stitches - i, x + cellSize / 2, y + cellSize);
+		}
 	}
 	for (let i = rows; i > -gridSize; i -= gridSize) {
 		if (i < 0) {
@@ -322,7 +328,10 @@ function drawGuides() {
 		const y = cellSize * i;
 		stroke('#999');
 		line(0, y, x, y);
-		noStroke();
-		text(rows - i, x + cellSize, y);
+
+		if (i != rows) {
+			noStroke();
+			text(rows - i, x + cellSize, y + cellSize / 2 + 1);
+		}
 	}
 }
