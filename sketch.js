@@ -9,6 +9,8 @@ const validStitches = [48, 60, 72, 84, 96, 108, 120, 132];
 const minRows = 25;
 const maxRows = 70;
 
+let decreaseRows;
+
 const cellSize = 8;
 
 const simplex = new SimplexNoise();
@@ -86,20 +88,29 @@ function draw() {
 	if (change() || frameCount == 1) {
 
 		const canvasScale = 0.8;
+		const canvasWidth = canvasScale * (cellSize * stitches + 195);
+		let canvasHeight = canvasScale * (cellSize * rows + 85);
 
-		resizeCanvas(canvasScale * (cellSize * stitches + 195), canvasScale * (cellSize * rows + 85));
+		console.log(canvasHeight);
+		if (canvasHeight < 385) {
+			canvasHeight = 385;
+		}
+
+		resizeCanvas(canvasWidth, canvasHeight);
 		scale(canvasScale);
 
 		background('#fff');
 
-		translate(40, 50);
+		translate(40, 220);
 		drawKey();
 
-		translate(110, -6);
+		translate(110, -176);
 		drawChart();
 
 		translate(-cellSize / 2, -cellSize / 2);
 		drawGuides();
+
+		drawLabel();
 
 		updateClass('.Stitches', stitches);
 		updateClass('.Rows', rows);
@@ -143,23 +154,29 @@ function drawKey() {
 	const labels = ['knit', 'purl', 'k2tog', 'p2tog'];
 	const lineHeight = 35;
 
+	textSize(13);
+	textAlign(LEFT, BASELINE);
+
 	for (let i = 0; i < labels.length; i++) {
 		const label = labels[i];
 
 		noStroke();
-		fill('#222');
-		textSize(13);
-		textAlign(LEFT, BASELINE);
+		fill('#555');
 		text(label, 15, lineHeight * i + 4);
 		drawStitch(0, lineHeight * i, label);
 	}
+	noStroke();
+	fill('#555');
+	textSize(10);
+	text('scale: ' + patternScale, 15, lineHeight * (labels.length + 2));
+	text('texture: ' + texture, 15, lineHeight * (labels.length + 2.5));
 }
 
 function drawChart() {
 
 	const sections = getSections(stitches);
 	const sectionLength = stitches / sections
-	const decreaseRows = getDecreaseRows(sections);
+	decreaseRows = getDecreaseRows(sections);
 
 	let emptyStitches = 0;
 	let decreaseStitch = false;
@@ -334,4 +351,23 @@ function drawGuides() {
 			text(rows - i, x + cellSize, y + cellSize / 2 + 1);
 		}
 	}
+}
+
+function drawLabel() {
+
+	stroke('#999');
+	let crownDecreases = decreaseRows[decreaseRows.length - 1];
+
+	if (crownDecreases > rows - 1) {
+		crownDecreases = rows - 1;
+	}
+	const n = cellSize * crownDecreases + cellSize;
+	line(-cellSize * 2, 0, -cellSize * 4 / 3, 0)
+	line(-cellSize * 2, 0, -cellSize * 2, n);
+	line(-cellSize * 2, n, -cellSize * 4 / 3, n)
+
+	noStroke();
+	fill('#555');
+	textSize(13);
+	text('crown decreases', -60, n / 2, 20, 50);
 }
