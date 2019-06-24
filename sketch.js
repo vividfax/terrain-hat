@@ -1,13 +1,13 @@
-let rows = 59;
+let rows = 51;
 let stitches = 96;
-let patternScale = 1;
+let patternScale = 0.9;
 let texture = 0.2;
 
 let stitchSlider, rowSlider, scaleSlider, textureSlider;
 let saveButton;
 const validStitches = [48, 60, 72, 84, 96, 108, 120, 132];
 const minRows = 25;
-const maxRows = 80;
+const maxRows = 70;
 
 const cellSize = 8;
 
