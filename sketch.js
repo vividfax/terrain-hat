@@ -169,7 +169,7 @@ function drawKey() {
 	fill('#555');
 	textSize(10);
 	text('scale: ' + patternScale, 15, lineHeight * (labels.length + 2));
-	text('texture: ' + texture, 15, lineHeight * (labels.length + 2.5));
+	text('texture: ' + texture, 15, lineHeight * (labels.length + 2.5) + 1);
 }
 
 function drawChart() {
