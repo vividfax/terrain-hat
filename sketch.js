@@ -151,8 +151,8 @@ function change() {
 
 function drawKey() {
 
-	const labels = ['knit', 'purl', 'k2tog', 'p2tog'];
-	const lineHeight = 35;
+	const labels = ['knit', 'purl', 'k2tog', 'p2tog', 'no stitch'];
+	const lineHeight = 30;
 
 	textSize(13);
 	textAlign(LEFT, BASELINE);
@@ -169,7 +169,7 @@ function drawKey() {
 	fill('#555');
 	textSize(10);
 	text('scale: ' + patternScale, 15, lineHeight * (labels.length + 2));
-	text('texture: ' + texture, 15, lineHeight * (labels.length + 2.5) + 1);
+	text('texture: ' + texture, 15, lineHeight * (labels.length + 2.5) + 3.5);
 }
 
 function drawChart() {
@@ -211,7 +211,7 @@ function drawChart() {
 						stitchType = 'p2tog';
 					}
 				} else if (emptyStitches - h > 0) {
-					stitchType = 'empty';
+					stitchType = 'no stitch';
 				} else if (noise == 0) {
 					stitchType = 'knit';
 				} else {
@@ -291,7 +291,7 @@ function drawStitch(x, y, type) {
 	fill('#555');
 
 	switch (type) {
-		case 'empty':
+		case 'no stitch':
 			fill('#ccc');
 			rect(x, y, cellSize, cellSize);
 			break;
@@ -321,7 +321,8 @@ function drawGuides() {
 	const gridSize = stitches / getSections(stitches) / 2;
 
 	noStroke();
-	text('0', stitches * cellSize + cellSize, rows * cellSize + cellSize);
+	text('1', stitches * cellSize - cellSize / 2, rows * cellSize + cellSize);
+	text('1', stitches * cellSize + cellSize, rows * cellSize - cellSize / 2 + 1);
 
 	for (let i = stitches; i > -gridSize; i -= gridSize) {
 		if (i < 0) {
