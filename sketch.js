@@ -1,11 +1,11 @@
 let rows = 51;
 let stitches = 96;
-let patternScale = 0.9;
+let patternScale = 0.5;
 let texture = 0.2;
 
 let stitchSlider, rowSlider, scaleSlider, textureSlider;
 let saveButton;
-const validStitches = [48, 60, 72, 84, 96, 108, 120, 132];
+const validStitches = [60, 70, 72, 80, 84, 90, 96, 100, 108, 110, 120];
 const minRows = 25;
 const maxRows = 70;
 
@@ -23,16 +23,15 @@ function setup() {
 	makeControls();
 
 	pixelDensity(4);
-	// background('#ccc');
 	noStroke();
 	rectMode(CENTER);
 
-	// noLoop();
+	draw();
 }
 
 function makeControls() {
 
-	stitchSlider = makeSlider(stitchSlider, 'Stitches', 0, validStitches.length - 1, 4, 1);
+	stitchSlider = makeSlider(stitchSlider, 'Stitches', 0, validStitches.length - 1, 5, 1);
 	rowSlider = makeSlider(rowSlider, 'Rows', minRows, maxRows, rows, 1);
 	scaleSlider = makeSlider(scaleSlider, 'Scale', 0.1, 2.5, patternScale, 0.1);
 	textureSlider = makeSlider(textureSlider, 'Texture', 0, 0.9, texture, 0.1);
@@ -63,10 +62,12 @@ function makeButton(buttonName, text, action) {
 }
 
 function saveImage() {
-	saveCanvas(stitches + '-sts-' + rows + '-rows', 'png');
+
+	const filename = stitches + '-sts-' + rows + '-rows';
+	saveCanvas(filename, 'png');
 }
 
-function bulkSave(range) {
+function bulkSaveImages(range) {
 
 	range += 1;
 	const originalRows = rows;
@@ -85,39 +86,38 @@ function bulkSave(range) {
 
 function draw() {
 
-	if (change() || frameCount == 1) {
-
-		const canvasScale = 0.8;
-		const canvasWidth = canvasScale * (cellSize * stitches + 195);
-		let canvasHeight = canvasScale * (cellSize * rows + 85);
-
-		console.log(canvasHeight);
-		if (canvasHeight < 385) {
-			canvasHeight = 385;
-		}
-
-		resizeCanvas(canvasWidth, canvasHeight);
-		scale(canvasScale);
-
-		background('#fff');
-
-		translate(40, 220);
-		drawKey();
-
-		translate(110, -176);
-		drawChart();
-
-		translate(-cellSize / 2, -cellSize / 2);
-		drawGuides();
-
-		drawLabel();
-
-		updateClass('.Stitches', stitches);
-		updateClass('.Rows', rows);
-		updateClass('.Scale', patternScale.toFixed(1));
-		updateClass('.Texture', texture.toFixed(1));
-		updateClass('.Interval', stitches / 12);
+	if (!change()) {
+		return;
 	}
+	const canvasScale = 0.8;
+	const canvasWidth = canvasScale * (cellSize * stitches + 195);
+	let canvasHeight = canvasScale * (cellSize * rows + 85);
+
+	if (canvasHeight < 385) {
+		canvasHeight = 385;
+	}
+
+	resizeCanvas(canvasWidth, canvasHeight);
+	scale(canvasScale);
+
+	background('#fff');
+
+	translate(40, 220);
+	drawKey();
+
+	translate(110, -176);
+	drawChart();
+
+	translate(-cellSize / 2, -cellSize / 2);
+	drawGuides();
+
+	drawLabel();
+
+	updateClass('.Stitches', stitches);
+	updateClass('.Rows', rows);
+	updateClass('.Scale', patternScale.toFixed(1));
+	updateClass('.Texture', texture.toFixed(1));
+	updateClass('.Interval', stitches / getSections(stitches) / 2);
 }
 
 function updateClass(className, html) {
@@ -226,8 +226,8 @@ function drawChart() {
 
 function getSections(stitchCount) {
 
-	for (let i = 6; i <= 8; i++) {
-		if (stitchCount % i == 0) {
+	for (let i = 6; i >= 4; i--) {
+		if (stitchCount % (i * 2) == 0) {
 			return i;
 		}
 	}
