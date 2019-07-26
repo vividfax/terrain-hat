@@ -198,8 +198,8 @@ function drawChart() {
 				const i = g * sectionLength + h;
 
 				let stitchType;
-				// const ratio = 2/ 3; // stitch/row gauge
-				const ratio = 1; // stitch/row gauge
+				const ratio = 2 / 3; // stitch/row gauge
+				// const ratio = 1; // stitch/row gauge
 
 				const x = stitchCount / sections * g + h - sectionLength + stitchCount / sections;
 				const noise = getSimplex(x, (rows - j) * ratio, stitchCount);
@@ -208,16 +208,23 @@ function drawChart() {
 					if (noise == 0) {
 						stitchType = 'k2tog';
 					} else {
-						stitchType = 'p2tog';
+						if (j % 2 == 0) {
+							stitchType = 'k2tog';
+						} else {
+							stitchType = 'p2tog';
+						}
 					}
 				} else if (emptyStitches - h > 0) {
 					stitchType = 'no stitch';
 				} else if (noise == 0) {
 					stitchType = 'knit';
 				} else {
-					stitchType = 'purl';
+					if (j % 2 == 0) {
+						stitchType = 'knit';
+					} else {
+						stitchType = 'purl';
+					}
 				}
-
 				drawStitch(i * cellSize, j * cellSize, stitchType);
 			}
 		}
