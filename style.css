@@ -8,17 +8,32 @@ canvas {
     margin: auto;
 }
 
-#sketchPanel {
-    background: #fff;
-}
-
-#controlPanel {
+.bgTeal {
     background: #008585;
 }
 
-#textPanel,
-body {
+.bgPurple {
     background: #B6A9C2;
+}
+
+.bgWhite {
+    background: #fff;
+}
+
+.textTeal {
+    color: #008585;
+}
+
+.textDarkTeal {
+    color: #007273;
+}
+
+.textGrey {
+    color: #555;
+}
+
+.fullHeight {
+    height: 100%;
 }
 
 .btn-outline-light:hover,
@@ -87,5 +102,9 @@ a {
 
 a:hover {
     color: #fff;
+    text-decoration: none;
+}
+
+.btn {
     text-decoration: none;
 }

@@ -21,42 +21,45 @@
 	<script src="controls.js"></script>
 </head>
 
-<body class="">
+<body>
 	<div class="container-fluid">
 		<div class="row" id="controlPanel">
-			<div class="col-sm-9 order-2 order-sm-1 pt-5 pb-4 overflow-auto" id="sketchPanel">
-				<div class="mt-2" id="sketch-holder"></div>
-			</div>
-			<div class="col-sm-2 order-1 order-sm-2 pt-5 pb-4 ml-sm-4">
-				<h1 class="mb-3 pt-4" id="title">
-					terrain hat generator
-				</h1>
-				<p class="mb-4 pb-3 mt-4 font-italic">
-					Knitting chart generator for the Terrain Hat; a hat that uses simplex noise as a stitch pattern.
-				</p>
-				<div class="mb-4" id="controls"></div>
+			<div class="col-sm-9 order-2 order-sm-1 pt-5 mt-2 pb-4 overflow-auto" id="sketch-holder"></div>
+			<div class="col-sm-3 order-1 order-sm-2 p-sm-0 pt-sm-5 pt-5 pb-sm-2 pb-2 bgTeal">
+				<div class="col-sm-9 bgTeal p-sm-0 pl-sm-5">
+					<h1 class="mb-3 pt-4" id="title">
+						terrain hat generator
+					</h1>
+					<p class="mb-4 pb-3 mt-4 font-italic">
+						Knitting chart generator for the Terrain Hat; a hat that uses simplex noise as a stitch
+						pattern.
+					</p>
+					<div class="mb-5" id="controls"></div>
+				</div>
 			</div>
 		</div>
-		<div class="row pt-5 pb-5 mb-5" id="textPanel">
-			<div class="col-sm-8 offset-sm-1 pr-0 mb-5">
+		<div class="row" id="explainer">
+			<div class="col-sm-1 p-sm-0 bgPurple">
+				<div class="col-sm-9 p-sm-0 fullHeight bgWhite"></div>
+			</div>
+			<div class="col-sm-8 pt-5 pb-5 bgPurple">
 
 				<div class="row">
-					<div class="col-sm-4 pr-sm-4 text-sm-right font-italic darkText">
-						<p>
+					<div class="col-sm-4 pr-sm-4 textDarkTeal text-sm-right font-italic">
+						<p class="pr-sm-3">
 							simplex noise
 						</p>
 					</div>
-					<div class="col-sm-8">
+					<div class="col-sm-8 p-sm-0">
 						<p>
 							Simplex noise is a clustered randomness algorithm. When translated into knits and purls it
-							produces a stitch pattern with an organic texture.
+							produces a stitch pattern with an organic texture. The chart generator uses a new noise
+							pattern each time the page is visited, creating a unique
+							hat chart.
 						</p>
 						<p>
-							The chart generator uses a new noise pattern each time the page is visited, creating a
-							unique hat chart. Every single hat is one of a kind.
-						</p>
-						<p>
-							Unlike many traditional knitting patterns, there are no section repeats. The knitting chart
+							Unlike many traditional knitting patterns, there are no section repeats. The knitting
+							chart
 							shows the pattern in full: every knit and every purl. The lack of repeats does mean the
 							pattern requires more focus when knitting, however, the upside is that any mistakes in
 							following the pattern are barely noticeable.
@@ -64,8 +67,8 @@
 					</div>
 				</div>
 
-				<div class="row mt-2 mb-4">
-					<div class="col-sm-8 offset-sm-4">
+				<div class="row mt-2 pt-3 pb-3 mb-4">
+					<div class="col-sm-8 offset-sm-4 p-sm-0">
 						<div id="myCarousel" class="carousel slide" data-ride="carousel">
 							<div class="carousel-inner">
 								<div class="carousel-item active">
@@ -91,27 +94,40 @@
 				</div>
 
 				<div class="row">
-					<div class="col-sm-4 pr-sm-4 text-sm-right font-italic darkText">
-						<p>
+					<div class="col-sm-4 pr-sm-4 textDarkTeal text-sm-right font-italic">
+						<p class="pr-sm-3">
 							charted knitting
 						</p>
 					</div>
-					<div class="col-sm-8">
-						<p>
+					<div class="col-sm-8 p-sm-0">
+						<p class="mb-sm-0">
 							The hat is knit in the round from the bottom up, using circular needles and/or DPNs. The
-							chart is read from right to left, beginning at the bottom right corner. Decreases are used
+							chart is read from right to left, beginning at the bottom right corner. Decreases are
+							used
 							to shape the crown.
 						</p>
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="col-sm-4 pr-sm-4 text-sm-right font-italic darkText">
-						<p>
+			</div>
+			<div class="col-sm-2 bgPurple"></div>
+			<div class="col-sm-1 p-sm-0 bgTeal">
+				<div class="col-sm-3 p-sm-0 bgPurple fullHeight"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-3 offset-sm-9 bgTeal pt-sm-5"></div>
+		</div>
+		<div class="row textGrey" id="instructions">
+			<div class="col-sm-8 offset-sm-1">
+
+				<div class="row pt-5 pt-sm-0">
+					<div class="col-sm-4 pr-sm-4 textTeal font-italic text-sm-right">
+						<p class="pr-sm-3">
 							yarn weight
 						</p>
 					</div>
-					<div class="col-sm-8">
+					<div class="col-sm-8 p-sm-0">
 						<p>
 							Aran / 10 ply (8 wpi)
 						</p>
@@ -119,12 +135,12 @@
 				</div>
 
 				<div class="row">
-					<div class="col-sm-4 pr-sm-4 text-sm-right font-italic darkText">
-						<p>
+					<div class="col-sm-4 pr-sm-4 textTeal font-italic text-sm-right">
+						<p class="pr-sm-3">
 							gauge
 						</p>
 					</div>
-					<div class="col-sm-8">
+					<div class="col-sm-8 p-sm-0">
 						<p>
 							18 stitches and 24 rows = 4 inches (10 cm) in stockinette
 						</p>
@@ -132,12 +148,12 @@
 				</div>
 
 				<div class="row">
-					<div class="col-sm-4 pr-sm-4 text-sm-right font-italic darkText">
-						<p>
+					<div class="col-sm-4 pr-sm-4 textTeal font-italic text-sm-right">
+						<p class="pr-sm-3">
 							needles
 						</p>
 					</div>
-					<div class="col-sm-8">
+					<div class="col-sm-8 p-sm-0">
 						<p>
 							16 inch US 6 (4.0 mm) circular needles
 							<br>
@@ -147,12 +163,12 @@
 				</div>
 
 				<div class="row">
-					<div class="col-sm-4 pr-sm-4 text-sm-right font-italic darkText">
-						<p>
+					<div class="col-sm-4 pr-sm-4 textTeal font-italic text-sm-right">
+						<p class="pr-sm-3">
 							notions
 						</p>
 					</div>
-					<div class="col-sm-8">
+					<div class="col-sm-8 p-sm-0">
 						<p>
 							Stitch markers
 							<br>
@@ -162,12 +178,12 @@
 				</div>
 
 				<div class="row">
-					<div class="col-sm-4 pr-sm-4 text-sm-right font-italic darkText">
-						<p>
+					<div class="col-sm-4 pr-sm-4 textTeal font-italic text-sm-right">
+						<p class="pr-sm-3">
 							yardage
 						</p>
 					</div>
-					<div class="col-sm-8">
+					<div class="col-sm-8 p-sm-0">
 						<p>
 							131 - 175 yards (120 - 160 m)
 						</p>
@@ -175,26 +191,26 @@
 				</div>
 
 				<div class="row">
-					<div class="col-sm-4 pr-sm-4 text-sm-right font-italic darkText">
-						<p>
+					<div class="col-sm-4 pr-sm-4 textTeal font-italic text-sm-right">
+						<p class="pr-sm-3">
 							sizing
 						</p>
 					</div>
-					<div class="col-sm-8">
+					<div class="col-sm-8 p-sm-0">
 						<p>
-							Adult medium = 96 stitches and 51 rows = 18.5 inches circumference (unstretched), 10
-							inches long (unfolded brim)
+							Adult medium = 96 stitches and 51 rows = 18.5 inches circumference (unstretched), 10 inches
+							long (unfolded brim)
 						</p>
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="col-sm-4 pr-sm-4 text-sm-right font-italic darkText">
-						<p>
+				<div class="row pt-5">
+					<div class="col-sm-4 pr-sm-4 textTeal font-italic text-sm-right">
+						<p class="pr-sm-3">
 							directions
 						</p>
 					</div>
-					<div class="col-sm-8">
+					<div class="col-sm-8 p-sm-0">
 						<p>
 							Cast on <span class="Stitches">96</span> stitches and join for working in the round.
 						</p>
@@ -209,23 +225,25 @@
 								class="Interval">8</span> stitches.
 						</p>
 						<p>
-							Work from the chart, slipping stitch markers. Change to DPNs when there are too few stitches
+							Work from the chart, slipping stitch markers. Change to DPNs when there are too few
+							stitches
 							to fit on circular needles.
 						</p>
 						<p>
-							Break yarn, leaving an 8 inch tail. Using the tapestry needle, thread the tail through the
+							Break yarn, leaving an 8 inch tail. Using the tapestry needle, thread the tail through
+							the
 							remaining stitches and weave in ends.
 						</p>
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="col-sm-4 pr-sm-4 text-sm-right font-italic darkText">
-						<p>
+				<div class="row pt-5">
+					<div class="col-sm-4 pr-sm-4 textTeal font-italic text-sm-right">
+						<p class="pr-sm-3">
 							abbreviations
 						</p>
 					</div>
-					<div class="col-sm-8">
+					<div class="col-sm-8 p-sm-0">
 						<p>
 							DPNs - double pointed needles
 							<br>
@@ -241,34 +259,33 @@
 				</div>
 
 				<div class="row">
-					<div class="col-sm-4 pr-sm-4 text-sm-right font-italic darkText">
-						<p>
+					<div class="col-sm-4 pr-sm-4 textTeal font-italic text-sm-right">
+						<p class="pr-sm-3">
 							notes
 						</p>
 					</div>
-					<div class="col-sm-8">
+					<div class="col-sm-8 p-sm-0">
 						<p>
-							I recommend saving your pattern at several different row counts, just in case you
-							decide you want to start the crown decreases earlier or later.
+							I recommend saving your pattern at several different row counts, just in case you decide you
+							want to start the crown decreases earlier or later.
 						</p>
 					</div>
 				</div>
 
-				<div class="row">
-					<div class="col-sm-4 pr-sm-4 text-sm-right font-italic darkText">
-						<p>
-							:)
-						</p>
-					</div>
-					<div class="col-sm-8">
-						<p>
-							Please tag me @vividfax on <a href="https://www.instagram.com/vividfax/">Instagram</a> and
-							<a href="https://twitter.com/vividfax">Twitter</a> with photos of your projects. I would
-							love to see what you make!
-						</p>
-					</div>
-				</div>
-
+			</div>
+		</div>
+		<div class="row mt-5 bgPurple" id="footer">
+			<div class="col-sm-4 offset-sm-4 pt-3 pb-4 text-center">
+				<a class="btn btn-outline-light mb-4 mt-4 pr-sm-5 pl-sm-5" href="#" role="button">
+					Ravelry page
+				</a>
+				<p class="mb-2">
+					Tag me @vividfax on <a href=" https://www.instagram.com/vividfax/">Instagram</a> and <a
+						href="https://twitter.com/vividfax">Twitter</a> with photos of your projects.
+				</p>
+				<p>
+					I'd love to see what you make!
+				</p>
 			</div>
 		</div>
 	</div>
