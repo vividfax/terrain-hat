@@ -1,6 +1,6 @@
 function makeControls() {
 
-    stitchSlider = makeSlider(stitchSlider, 'Stitches', 0, validStitches.length - 1, 4, 1);
+    stitchSlider = makeSlider(stitchSlider, 'Stitches', 0, validStitches.length - 1, 6, 1);
     rowSlider = makeSlider(rowSlider, 'Rows', minRows, maxRows, rows, 1);
     scaleSlider = makeSlider(scaleSlider, 'Scale', 0.1, 2.5, patternScale, 0.1);
     textureSlider = makeSlider(textureSlider, 'Texture', 0, 0.9, texture, 0.1);
