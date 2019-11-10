@@ -1,7 +1,7 @@
 let rows = 51;
 let stitches = 0;
-let patternScale = 0.5;
-let texture = 0.2;
+let patternScale = 0.2;
+let texture = 0.9;
 
 let stitchSlider, rowSlider, scaleSlider, textureSlider;
 let saveButton;
