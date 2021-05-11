@@ -24,7 +24,7 @@ function makeButton(buttonName, text, action) {
 
     buttonName = createButton(text);
     buttonName.parent('controls');
-    buttonName.class('btn btn-outline-light btn-block mt-5');
+    buttonName.class('btn btn-light btn-block mt-5');
     buttonName.mousePressed(action);
 
     return buttonName;

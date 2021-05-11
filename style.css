@@ -36,7 +36,11 @@ canvas {
     height: 100%;
 }
 
-.btn-outline-light:hover,
+.btn-light {
+    background-color: #fff;
+}
+
+.btn-light, .btn-light:hover,
 .darkText {
     color: #007273;
 }
