@@ -22,7 +22,7 @@ function setup() {
 
 	makeControls();
 
-	pixelDensity(4);
+	pixelDensity(8);
 	noStroke();
 	rectMode(CENTER);
 
